@@ -16,6 +16,14 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.glassmorphism-dropdown {
+  background: rgba(10, 7, 28, 0.98); /* Extremely high opacity to completely prevent visual content merging */
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.8), 0 0 15px rgba(138, 43, 226, 0.15);
+}
+
 .glassmorphism-light {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(8px);

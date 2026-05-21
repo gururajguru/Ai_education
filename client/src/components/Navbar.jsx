@@ -114,7 +114,7 @@ export default function Navbar({ currentPage, setCurrentPage }) {
 
           {/* Notifications Dropdown Panel */}
           {notifOpen && (
-            <div className="absolute right-0 mt-3 w-80 glassmorphism rounded-2xl p-4 shadow-2xl border border-white/10 z-50 animate-in fade-in slide-in-from-top-3 duration-200">
+            <div className="absolute right-0 mt-3 w-80 glassmorphism-dropdown rounded-2xl p-4 shadow-2xl border border-white/10 z-50 animate-in fade-in slide-in-from-top-3 duration-200">
               <div className="flex items-center justify-between pb-3 border-b border-white/10">
                 <span className="font-bold text-sm tracking-wide text-white">Notifications</span>
                 <div className="flex gap-2">
@@ -171,7 +171,7 @@ export default function Navbar({ currentPage, setCurrentPage }) {
 
           {/* Profile Dropdown Options */}
           {profileOpen && (
-            <div className="absolute right-0 mt-3 w-56 glassmorphism rounded-2xl p-3 shadow-2xl border border-white/10 z-50 animate-in fade-in slide-in-from-top-3 duration-200">
+            <div className="absolute right-0 mt-3 w-56 glassmorphism-dropdown rounded-2xl p-3 shadow-2xl border border-white/10 z-50 animate-in fade-in slide-in-from-top-3 duration-200">
               <div className="px-2 py-1.5 border-b border-white/15 mb-2">
                 <p className="font-bold text-xs text-white truncate">{user.name}</p>
                 <p className="text-xs text-slate-400 truncate">{user.email}</p>
