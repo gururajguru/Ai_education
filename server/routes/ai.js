@@ -85,10 +85,14 @@ Adapt your explanation style to the current mode:
     
     if (history && Array.isArray(history)) {
       history.forEach(item => {
-        messages.push({
-          role: item.sender === 'user' ? 'user' : 'assistant',
-          content: item.text
-        });
+        const role = item.role || (item.sender === 'user' ? 'user' : 'assistant');
+        const content = item.content || item.text;
+        if (content) {
+          messages.push({
+            role: role === 'user' ? 'user' : 'assistant',
+            content: content
+          });
+        }
       });
     }
     
