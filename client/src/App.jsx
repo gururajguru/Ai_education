@@ -1,22 +1,22 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, lazy, Suspense } from 'react';
 import { UserProvider, UserContext } from './context/UserContext';
 import { LearningProvider } from './context/LearningContext';
 import ParticleBackground from './components/ParticleBackground';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 
-// Import all premium sub-pages
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import Tutor from './pages/Tutor';
-import Quiz from './pages/Quiz';
-import Courses from './pages/Courses';
-import Planner from './pages/Planner';
-import Profile from './pages/Profile';
-import Admin from './pages/Admin';
-import TeacherDashboard from './pages/TeacherDashboard';
-import StudyRoom from './components/StudyRoom';
+// Lazy-loaded premium sub-pages for optimal performance and chunk-splitting
+const Home = lazy(() => import('./pages/Home'));
+const Login = lazy(() => import('./pages/Login'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Tutor = lazy(() => import('./pages/Tutor'));
+const Quiz = lazy(() => import('./pages/Quiz'));
+const Courses = lazy(() => import('./pages/Courses'));
+const Planner = lazy(() => import('./pages/Planner'));
+const Profile = lazy(() => import('./pages/Profile'));
+const Admin = lazy(() => import('./pages/Admin'));
+const TeacherDashboard = lazy(() => import('./pages/TeacherDashboard'));
+const StudyRoom = lazy(() => import('./components/StudyRoom'));
 
 function LearningUniverseRouter() {
   const [page, setPage] = useState('home');
@@ -47,6 +47,11 @@ function LearningUniverseRouter() {
       }
     }
   }, [page, user?.role]);
+
+  // Reset scroll position to top on every page transition
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [page]);
 
   const renderActivePage = () => {
     switch (page) {
@@ -109,7 +114,16 @@ function LearningUniverseRouter() {
 
         {/* Dynamic Pages viewport */}
         <main className={`flex-1 overflow-x-hidden ${isPortalActive ? 'p-6 md:p-8' : 'p-0'}`}>
-          {renderActivePage()}
+          <Suspense fallback={
+            <div className="min-h-[50vh] w-full flex flex-col items-center justify-center gap-4 text-center">
+              <div className="h-10 w-10 rounded-full border-2 border-cyan-400/20 border-t-cyan-400 animate-spin" />
+              <span className="text-xs font-mono text-slate-500 uppercase tracking-widest animate-pulse">
+                Synchronizing Cosmos...
+              </span>
+            </div>
+          }>
+            {renderActivePage()}
+          </Suspense>
         </main>
       </div>
     </div>
