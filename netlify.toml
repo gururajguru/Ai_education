@@ -1,0 +1,17 @@
+# Netlify configuration file for monorepo / nested client build
+[build]
+  # Navigate to client directory before running build
+  base = "client"
+  
+  # Run Vite production build command
+  command = "npm run build"
+  
+  # Publish directory relative to the base directory (client/dist)
+  publish = "dist"
+
+# SPA redirection rule to route all frontend paths back to index.html 
+# and let React state router handle navigation without 404 errors
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
